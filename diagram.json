@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": -9.6, "left": -4.76, "attrs": {} },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht1",
+      "top": -47.7,
+      "left": -111,
+      "attrs": { "humidity": "28" }
+    },
+    {
+      "type": "wokwi-dht22",
+      "id": "dht2",
+      "top": -76.5,
+      "left": 205.8,
+      "attrs": { "humidity": "70.5" }
+    },
+    { "type": "wokwi-led", "id": "led1", "top": -61.2, "left": -169, "attrs": { "color": "red" } },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -95.8, "left": -9.6, "attrs": {} },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -92.05,
+      "left": -144,
+      "attrs": { "value": "1000" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "dht1:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht1:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "dht2:VCC", "esp:3V3", "red", [ "v0" ] ],
+    [ "dht2:SDA", "esp:5", "green", [ "v0" ] ],
+    [ "dht1:SDA", "esp:4", "green", [ "v0" ] ],
+    [ "relay1:IN", "esp:26", "green", [ "h0" ] ],
+    [ "relay1:VCC", "esp:5V", "red", [ "h0" ] ],
+    [ "relay1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "dht2:GND", "esp:GND.2", "black", [ "v0" ] ],
+    [ "relay1:COM", "esp:3V3", "green", [ "h0" ] ],
+    [ "relay1:NO", "led1:A", "green", [ "h0" ] ],
+    [ "led1:C", "r1:1", "green", [ "v0" ] ],
+    [ "r1:2", "esp:GND.2", "green", [ "v0" ] ]
+  ],
+  "dependencies": {}
+}
